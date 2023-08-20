@@ -1,4 +1,4 @@
-<div class="answer">My name is ...</div>
+<div class="answer">My name is <b>Guus</b></div>
 
 <style>
   div.answer {
