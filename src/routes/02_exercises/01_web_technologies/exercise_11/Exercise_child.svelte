@@ -2,4 +2,4 @@
     export let answer = 0;
 </script>
 
-<p>{answer}</p>
+<p>The answer is {answer}</p>
