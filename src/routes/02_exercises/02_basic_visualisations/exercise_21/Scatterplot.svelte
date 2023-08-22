@@ -5,17 +5,24 @@
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
-    export let data = []
+    export let data = [];
 
-    import { scaleLinear } from 'd3-scale'
-    const xscale = scaleLinear().domain(0,100000).range(0, innerWidth)
-    const yscale = scaleLinear().domain(0,100).range(0, innerHeight)
+    import { scaleLinear, scaleLog } from 'd3-scale';
+    const xscale = scaleLog().domain([300,150000]).range([0, innerWidth]);
+    const yscale = scaleLinear().domain([0,100]).range([innerHeight, 0]);
   </script>
   
   <svg viewBox="0 0 {width} {height}" style="max-width: {width}px">
     <g transform="translate({margin.left}, {margin.top})">
       {#each data as d}
-        <circle cx={xscale(d.income)} cy={yscale(d.life_exp)} r=10/>
+        {#if d.income && d.life_exp}
+          <circle 
+            cx={xscale(+d.income)} 
+            cy={yscale(+d.life_exp)} 
+            r=3  
+          >
+          </circle>
+        {/if}
       {/each}
     </g>
   </svg>

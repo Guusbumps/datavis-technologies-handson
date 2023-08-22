@@ -10,7 +10,6 @@
 
 </script>
 
-halloo
 {#if !data}
   <p>loading...</p>
 {:else}
