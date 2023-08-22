@@ -7,9 +7,18 @@
 
     export let data = [];
 
-    import { scaleLinear, scaleLog } from 'd3-scale';
+    import { select } from "d3-selection";
+    import { scaleLinear, scaleLog, scaleOrdinal } from 'd3-scale';
+    import { schemeTableau10 } from 'd3-scale-chromatic';
+    import { axisLeft, axisBottom} from 'd3-axis';
+
     const xscale = scaleLog().domain([300,150000]).range([0, innerWidth]);
     const yscale = scaleLinear().domain([0,100]).range([innerHeight, 0]);
+    const cscale = scaleOrdinal(schemeTableau10).domain(data.map((d) => d.continent))
+    const rscale = scaleLinear().domain([0,1400000000]).range([3,40])
+
+    const yAxis = (node) => axisLeft(yscale)(select(node));
+    const xAxis = (node) => axisBottom(xscale)(select(node));
   </script>
   
   <svg viewBox="0 0 {width} {height}" style="max-width: {width}px">
@@ -19,11 +28,14 @@
           <circle 
             cx={xscale(+d.income)} 
             cy={yscale(+d.life_exp)} 
-            r=3  
+            r={rscale(+d.population)}  
+            fill={cscale(d.continent)}
           >
           </circle>
         {/if}
       {/each}
     </g>
+    <g use:xAxis></g>
+    <g use:yAxis></g>
   </svg>
   
