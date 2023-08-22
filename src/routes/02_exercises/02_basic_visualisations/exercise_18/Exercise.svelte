@@ -14,7 +14,7 @@
     import { scaleLog } from 'd3-scale';
 
     const scale = scaleLog().domain([1, 10]).range([0, innerWidth]);
-    const xAxis = axisBottom(scale)
+    const xAxis = (node) => axisBottom(scale)(select(node))
 
   </script>
   
@@ -23,6 +23,8 @@
       {#each values as v}
         <circle cx={scale(v)} cy={innerHeight/2} r=10 />
       {/each}
+    </g>
+    <g use:xAxis transform="translate(0,10)">
     </g>
   </svg>
   
