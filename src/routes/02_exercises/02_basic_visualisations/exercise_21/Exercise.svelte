@@ -7,6 +7,12 @@
   onMount(async () => {
     data = await json("/data/gapminder.json");
   });
+
 </script>
 
-hallo
+halloo
+{#if !data}
+  <p>loading...</p>
+{:else}
+  <Scatterplot data={data[0]['countries']} />
+{/if}
