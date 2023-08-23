@@ -1,10 +1,11 @@
 <script>
   // Properties
-  export let year = 0;
   export let data = [];
+  export let year = 0;
+  export let selected_continent = "all";
+  const continents = ["europe", "asia", "americas", "africa"];  
   let interval = 0;
-  const continents = ["europe", "asia", "americas", "africa"];
-
+ 
   function start() {
     interval = setInterval(step, 50);
   }
@@ -14,7 +15,7 @@
   }
 
   function step() {
-    year += 1
+    year = (year + 1) % data.length;
   }
 
 </script>
@@ -24,5 +25,4 @@
   <button on:click={start}>start</button>
   <button on:click={stop}>stop</button>
   {year}
-  {data}
 </div>
