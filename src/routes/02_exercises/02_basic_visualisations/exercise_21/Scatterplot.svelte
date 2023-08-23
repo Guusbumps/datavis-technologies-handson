@@ -32,6 +32,7 @@
             fill={cscale(d.continent)}
           >
           </circle>
+          <text font-size=50>year 1800</text>
         {/if}
       {/each}
     </g>
