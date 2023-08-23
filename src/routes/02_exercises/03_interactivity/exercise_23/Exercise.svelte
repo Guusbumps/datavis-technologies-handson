@@ -1,4 +1,6 @@
 <script>
+    import { onMount } from "svelte";
+
     // Dimensions
     const width = 800;
     const height = 100;
@@ -20,11 +22,28 @@
   
     // Color
     let color = "darkred";
+    $: if (index == -1) {
+      color = "darkgreen";
+    }
+
+    onMount(() => {
+      let handle = null;
+      handle = setInterval(() => {
+        if (index-- === 0) {
+          clearInterval(handle);
+        }
+        }, 1000);
+  });
+
   </script>
   
   <svg viewBox="0 0 {width} {height}">
     <g transform="translate({margin.left},{margin.top})">
-      <!--  -->
+      {#each points as p, i}
+        <circle cx={p} cy={innerHeight} r=10 fill={color}
+        opacity = {i + 1 <= index ? 0.3 : 1} >
+        </circle>
+      {/each}
     </g>
   </svg>
   
