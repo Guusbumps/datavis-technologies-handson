@@ -10,13 +10,15 @@
   onMount(async () => {
     data = await json("/data/gapminder.json");
   });
+
+  let year = 0;
 </script>
 
 {#if !data}
   <p>Loading the data, please wait...</p>
 {:else}
   <div>
-    <Scatterplot data={data[0]['countries']} />
+    <Scatterplot data={data[{year}]['countries']} />
     <Controls {data} />
   </div>
 {/if}
